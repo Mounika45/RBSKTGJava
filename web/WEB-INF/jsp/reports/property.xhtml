@@ -1,0 +1,182 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:icecore="http://www.icefaces.org/icefaces/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:hf="http://highfaces.org">
+
+    <h:form style="border-color: green;">
+
+        <ace:panel id="InputPanel" header="Reports Screen">
+            <table>
+                <tr>
+                    <td>
+                        <h:outputText value="District Name:"/>
+                    </td>
+                    <td>
+                        <ace:selectMenu id="selectdistrictId" value="#{reportsBean.districtsVo.districtId}" rendered="true" valueChangeListener="#{reportsBean.districtChangeListener}" requiredMessage="District Name is Required" title="Select District">
+                            <f:selectItems value="#{reportsBean.districtsList}"/>
+                            <ace:ajax />
+                        </ace:selectMenu>
+                        <ace:message for="selectdistrictId" />
+                    </td>
+                    
+                    <td>
+                        <h:outputText value="ULB Name :"/>
+                    </td>
+                    <td>
+                        <ace:selectMenu id="selectUlbId" value="#{reportsBean.districtsVo.ulbid}" requiredMessage="ULB Name is Required" title="Select ULB">
+                            <f:selectItems value="#{reportsBean.ulbList}"/>
+                            <ace:ajax />
+                        </ace:selectMenu>
+                        <ace:message for="selectUlbId" />
+                    </td>
+                    
+                    <td>
+                        <h:outputText value="Financial Year:"/>
+                    </td>
+                    <td>
+                        <ace:selectMenu id="selectfinId" value="#{reportsBean.districtsVo.finYearId}" rendered="true" requiredMessage="Year Name is Required" title="Select Year">
+                            <f:selectItems value="#{reportsBean.finYearList}"/>
+                            <ace:ajax />
+                        </ace:selectMenu>
+                    </td>
+                </tr>
+
+
+                <tr >
+                    <td style="margin-left: 40%">
+                        <h:commandButton id="Search" value="Search" class="btn1" action="#{reportsBean.searchPropertyReports}" />                               
+                    </td>
+                </tr>
+
+            </table>
+
+        </ace:panel>
+    </h:form>
+
+<h:form >
+    
+    <ace:panel>
+        <h:commandButton id="back" action="#{reportsBean.backPage}" value="Back" class="btn1" style="margin-left: 90%" />
+            <h:panelGrid columns="2" styleClass="centeredPanelGrid">
+                <h:outputLabel for="typeIn" value="Export As:"/>
+                <h:selectOneRadio id="typeIn" value="#{reportDownloadBean.type}" required="true">
+                    <f:ajax disabled="false"/>
+                    <f:selectItem itemValue="csv" itemLabel="CSV"/>
+                    <f:selectItem itemValue="pdf" itemLabel="PDF"/>
+                    <f:selectItem itemValue="xls" itemLabel="XLS"/>
+                    <f:selectItem itemValue="xml" itemLabel="XML"/>
+                </h:selectOneRadio>
+                
+            </h:panelGrid>
+            <h:panelGrid styleClass="centeredPanelGrid">
+                <ace:dataExporter id="dataExporter" label="Export File" excludeColumns="8" type="#{reportDownloadBean.type}" target="reportsListTable" fileName="ReformReport" selectedRowsOnly="#{reportDownloadBean.selectRowsOnly}" />
+            </h:panelGrid>
+        </ace:panel>
+        </h:form>
+
+
+    <h:form id="PropertyReports" style="border-color: green;">
+        
+        <!--<ace:dataExporter type="csv" label="Export" target="myTable" fileName="tableData"/>-->
+
+        <ace:dataTable id="myTable" 
+                       value="#{reportsBean.propertyReportsList}"
+                           var="property"  style="align:middle;background-color:#E2F0FF;alignment-adjust: central"     
+                           paginator="true" 
+                           stateMap="#{reportDownloadBean.stateMap}"
+                           selectionMode="multiple" 
+                           paginatorPosition="bottom" binding="#{listrow}" > 
+
+            <ace:column id="lblrowNo" headerText="S No"  >                       
+                <h:outputText id="txtrowNos" value="#{listrow.rowIndex+1}" />                      
+            </ace:column>
+
+            <ace:column  id="reformName" headerText="Ward Number"  sortBy="#{property.wardNo}" filterBy="#{property.wardNo}"  filterMatchMode="contains"  >
+
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="nameCell3" value="#{property.wardNo}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInpu3t" value="#{property.wardNo}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column>
+
+            <ace:column id="milestone"  headerText="House Number" sortBy="#{property.houseNo}" filterBy="#{property.houseNo}"  filterMatchMode="contains"  >
+
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="nameCell" value="#{property.houseNo}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInput" value="#{property.houseNo}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column> 
+
+            <ace:column id="implementation" headerText="Address" sortBy="#{property.address}" filterBy="#{property.address}"  filterMatchMode="contains"  >
+
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="nameCell1" value="#{property.address}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInput1" value="#{property.address}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column> 
+
+            <ace:column id="propertysqft" headerText="Floor Number"  sortBy="#{property.floorNo}" filterBy="#{property.floorNo}"  filterMatchMode="contains"  >
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="namedev14" value="#{property.floorNo}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInpuDev13" value="#{property.floorNo}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column>
+
+            <ace:column id="prescriptionsdf" headerText="Flat Number"  sortBy="#{property.flatNo}" filterBy="#{property.flatNo}"  filterMatchMode="contains"  >
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="namedev12" value="#{property.flatNo}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInpuDev11" value="#{property.flatNo}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column>
+
+            <ace:column id="prescription" headerText="Current Year Property Type" sortBy="#{property.curYearPropertyType}" filterBy="#{property.curYearPropertyType}" filterMatchMode="contains"  >
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="namedev1" value="#{property.curYearPropertyType}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInpuDev1" value="#{property.curYearPropertyType}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column>
+
+            <ace:column id="timeLine" headerText="Previous Year Property Type" sortBy="#{property.preYearPropertyType}" filterBy="#{property.preYearPropertyType}" filterMatchMode="contains"  >
+                <ace:cellEditor>
+                    <f:facet name="output">
+                        <h:outputText id="namedev2" value="#{property.preYearPropertyType}"/>
+                    </f:facet>
+                    <f:facet name="input">
+                        <ace:richTextEntry id="nameInpuDev2" value="#{property.preYearPropertyType}"/>
+                    </f:facet>
+                </ace:cellEditor>
+            </ace:column>
+
+        </ace:dataTable>
+    </h:form>
+    <br/><br/>
+
+</ui:composition>

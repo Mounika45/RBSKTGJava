@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:icecore="http://www.icefaces.org/icefaces/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:hf="http://highfaces.org">
+
+
+    <style>
+        #navcontainer ul
+        {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #navcontainer ul li { display: inline; }
+
+    </style>
+    <h:head>
+        <script type="text/javascript">
+//	    function printHiddenValue(){
+
+//	       alert(document.getElementById('ProjectsForm:projectsIds').value);
+//	    }
+        </script>
+    </h:head>
+
+    <h:form id="reportsForm" style="border-color: green; background-color: #FFF">
+
+        <ace:panel header=" List" style=" border-color: green;text-align:left">
+
+            <table align="center" style="padding:2px;margin-left:100px;margin-right:100px !important;">
+
+
+                <div id="navcontainer">
+                    <table align="center" style="padding:2px; width: 55%" cellpadding="5" cellspacing="5">
+
+
+                        <div style="border-bottom-width:60px;" id="div1">
+                            <tr align="center" >
+                                <h:panelGrid columns="2" style="margin-left: 18%" >
+                                    <h:panelGrid  style="width: 400px" >
+                                        <h:column rendered="#{dashBoardBean.finYearList.size() gt 0 ? true : false}">
+                                            <td align="center" style=" background-color: #5fb4ef !important; color: black !important; height: 100px; ">
+
+                                                <c:forEach var="pending" items="#{dashBoardBean.finYearList}" varStatus="pendingStatus" end="0" begin="0"  >
+                                                    <span >                                            
+                                                        <strong>Change in Property Type</strong><br/>
+                                                        <strong>2015-16</strong><br/><br/>
+                                                    </span>
+                                                    
+                                                    <ace:linkButton id="projectsIds"  value="more info ->"  action="#{dashBoardBean.propertypage}" immediate="true" class="box" >
+                                                        
+                                                    </ace:linkButton>
+                                                </c:forEach>
+
+                                            </td>
+
+                                        </h:column>
+                                    </h:panelGrid>
+
+                                    <h:panelGrid style="width: 400px">
+                                        <h:column rendered="#{dashBoardBean.finYearList.size() gt 0 ? true : false}">
+                                            <td align="center" style=" background-color: #a1c436 !important; color: black !important; height: 100px; ">
+
+                                                <c:forEach var="pending"  items="#{dashBoardBean.finYearList}" varStatus="pendingStatus" end="0" begin="0">
+                                                    <span >                                            
+                                                        <strong>Change in Square Feet</strong><br/>
+                                                        <strong>2015-16</strong><br/><br/>
+                                                    </span>
+
+                                                    <ace:linkButton id="projectsaasIds"   value="more info ->" action="#{dashBoardBean.areaPage}" class="box" >
+                                                    </ace:linkButton>
+
+
+                                                </c:forEach>
+
+                                            </td>
+                                        </h:column> 
+                                    </h:panelGrid>
+                                    
+                                    <h:panelGrid style="width: 400px">
+                                        <h:column rendered="#{dashBoardBean.finYearList.size() gt 0 ? true : false}">
+                                            <td align="center" style=" background-color: #AAA !important; color: black !important; height: 100px; ">
+
+                                                <c:forEach var="pending"  items="#{dashBoardBean.finYearList}" varStatus="pendingStatus" end="0" begin="0">
+                                                    <span >                                            
+                                                        <strong>Change in Building Type</strong><br/>
+                                                        <strong>2015-16</strong><br/><br/>
+                                                    </span>
+
+                                                    <ace:linkButton id="projectsaasIdssss"   value="more info ->" action="#{dashBoardBean.buildingPage}" class="box" >
+                                                    </ace:linkButton>
+
+
+                                                </c:forEach>
+
+                                            </td>
+                                        </h:column> 
+                                    </h:panelGrid>
+                                    
+                                    <h:panelGrid style="width: 400px">
+                                        <h:column rendered="#{dashBoardBean.finYearList.size() gt 0 ? true : false}">
+                                            <td align="center" style=" background-color: lightcoral !important; color: black !important; height: 100px; ">
+
+                                                <c:forEach var="pending"  items="#{dashBoardBean.finYearList}" varStatus="pendingStatus" end="0" begin="0">
+                                                    <span >                                            
+                                                        <strong>New Properties</strong><br/>
+                                                        <strong>2015-16</strong><br/><br/>
+                                                    </span>
+
+                                                    <ace:linkButton id="projectsaasIdsss"   value="more info ->" action="#{dashBoardBean.newPropertyPage}" class="box" >
+                                                    </ace:linkButton>
+
+
+                                                </c:forEach>
+
+                                            </td>
+                                        </h:column> 
+                                    </h:panelGrid>
+                                    
+                                </h:panelGrid>
+                            </tr>
+
+                        </div>
+                    </table>
+<!--                    <h:panelGrid columns="2" style="margin-left: 5%">
+
+                        <hf:chart type="line" title="Line Chart">
+                            <hf:chartSerie name="girls" value="#{dashBoardBean.girls}"  var="point" point="#{point.amount}"  tickLabel="#{point.year}"/>
+
+                        </hf:chart>
+
+
+                        <hf:chart type="pie" title="Pie Chart">
+                            <hf:chartSerie name="Boys" value="#{dashBoardBean.boys}"  var="point" point="#{point.amount}"  tickLabel="#{point.year}"/>
+
+                        </hf:chart>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="3" style="margin-left: 5%">
+
+                        <hf:chart type="bar" title="Bar Chart">
+                            <hf:chartSerie name="Boys" value="#{dashBoardBean.boys}"  var="point" point="#{point.amount}"  tickLabel="#{point.year}"/>
+
+                        </hf:chart>
+                       
+                        <ace:growlMessages showDetail="true" position="top-right" redisplay="false"/>
+                        <hf:chart type="column" title="Column Chart" selectedSeries="#{dashBoardBean.selectedSeries}" selectedPoint="#{dashBoardBean.selectedPoint}">
+                           <ace:ajax event="select" listener="#{dashBoardBean.clicked}" />
+                            <hf:chartSerie name="Boys" value="#{dashBoardBean.boys}"  var="point" point="#{point.amount}"  tickLabel="#{point.year}"/>
+                            <hf:chartSerie name="Girls" value="#{dashBoardBean.girls}"  var="point" point="#{point.amount}" />
+
+                        </hf:chart>
+
+                    </h:panelGrid>-->
+                    <ace:chart id="piechart"
+                           animated="true"
+                           value="#{dashBoardBean.propertyPieData}" legend="true"
+                           legendPlacement="INSIDE_GRID" legendLocation="S" height="350" width="350" />
+
+                </div>
+            </table>
+
+
+        </ace:panel>   
+    </h:form>
+</ui:composition>

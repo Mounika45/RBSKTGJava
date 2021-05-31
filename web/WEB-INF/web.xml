@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+<!--    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>enclosureMaxSize</param-name>
+        <param-value>2097152</param-value>
+    </context-param>
+    <context-param>
+        <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>jdbcConfiguration</param-name>
+        <param-value>/WEB-INF/properties/jdbc.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.icefaces.ace.theme</param-name>
+        <param-value>ui-lightness</param-value>
+    </context-param>-->
+    <session-config>
+        <session-timeout>
+                15
+        </session-timeout>
+    </session-config>
+    <!--  <error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/index.xhtml?faces-redirect=true</location>
+    </error-page>
+     
+    <context-param> 
+        <param-name>com.icesoft.faces.heartbeatInterval</param-name> 
+        <param-value>50000</param-value> 
+    </context-param>
+         In the following code example, heartbeatTimeout defines how long, in milliseconds,
+    that the heartbeat monitor will wait for a response prior to timing out. If a heartbeat times out, 
+    the connection will be placed in a "caution" state while the
+    bridge attempts to recover the connection. The default value is 30000 (30 seconds).
+    <context-param> 
+        <param-name>com.icesoft.faces.heartbeatTimeout</param-name> 
+        <param-value>30000</param-value> 
+    </context-param>   The following code example defines heartbeatRetries, which specifies the number of consecutive timed-out
+    heartbeats allowed before the connection is considered failed and reported to the user as "disconnected" .
+    The default value is 3.
+
+    <context-param> 
+        <param-name>com.icesoft.faces.heartbeatRetries</param-name> 
+        <param-value>3</param-value> 
+    </context-param>
+    
+    <context-param> 
+		<param-name>com.icesoft.faces.blockingConnectionTimeout</param-name> 
+		<param-value>90000</param-value> 
+    </context-param> The connectionTimeout parameter defines how long, in milliseconds,
+that the bridge will wait for a response from the server for a user-initiated request 
+before declaring the connection lost. The default value is 60000 (60 seconds).
+
+        <context-param> 
+                        <param-name>com.icesoft.faces.connectionTimeout</param-name> 
+                        <param-value>60000</param-value> 
+        </context-param>
+        
+        <context-param>  
+		<param-name>org.icefaces.sessionExpiredRedirectURI</param-name>  
+		<param-value>/index_1.xhtml</param-value>  
+        </context-param> 
+    
+    
+     <error-page>
+        <location>/index_1.xhtml?faces-redirect=true</location>
+    </error-page>  -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <mime-mapping>
+        <extension>eot</extension>
+        <mime-type>font/eot</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff</extension>
+        <mime-type>font/woff</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>font/ttf</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>xml</extension>
+        <mime-type>application/xml</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>json</extension>
+        <mime-type>application/json</mime-type>
+    </mime-mapping>
+    
+</web-app>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- MPL License text (see http://www.mozilla.org/MPL/)  template="/resources/templates/content-template.xhtml" -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"  
+                xmlns:icecore="http://www.icefaces.org/icefaces/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <h:form>  
+        <ace:menuBar autoSubmenuDisplay="true"  style="background-color: lightblue" >
+
+            <ace:menuItem value="Home" action="#{menuBarBean.homePage}"  icon="ui-icon ui-icon-home" immediate="true">
+
+            </ace:menuItem>
+            <ace:menuItem id="c2" value=" Contact"   immediate="true">
+                <f:param name="pageName" value=""/>
+            </ace:menuItem>  
+            <ace:menuItem id="c3" value=" About" immediate="true">
+                <f:param name="pageName" value=""/>
+            </ace:menuItem>
+<!--            <ace:submenu label="Master">
+                <ace:menuItem id="c4" value="Employee Registration" action="#{menuBarBean.navigationActionPage}" immediate="true">
+                    <f:param name="pageName" value="employee"/>
+                </ace:menuItem>
+            </ace:submenu>-->
+
+        </ace:menuBar> 
+
+
+    </h:form>
+</ui:composition>

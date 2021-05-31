@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <context:component-scan base-package="com.aegis" />
+    <context:annotation-config />  
+    
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/properties/jdbc.properties" />
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driverClassName}" />	
+        <property name="jdbcUrl" value="${jdbc.url}" />	
+        <property name="user" value="${jdbc.username}" />	
+        <property name="password" value="${jdbc.password}" />	
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}" />
+        <property name="maxStatements" value="${jdbc.maxStatements}" />
+        <property name="minPoolSize" value="${jdbc.minPoolSize}" /> 
+    </bean>
+    
+            
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />       
+        <property name="packagesToScan">
+            <list>           
+               <value>com.aegis.entities</value>
+            </list>
+        </property>        
+        <property name="hibernateProperties">
+             <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop> 
+              <!--  <prop key="hibernate.current_session_context_class">thread</prop> -->
+                <prop key="hibernate.transaction.auto_close_session">false</prop>
+                <prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
+                <prop key="hibernate.connection.autocommit">false</prop> 
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>   
+                    
+            </props>
+        </property>        
+    </bean>
+    
+    <!-- Transaction Manager is defined -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+       <property name="sessionFactory" ref="sessionFactory"/>       
+    </bean>
+    
+    <!-- Enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <!--<bean id="mailSender" class="com.aegis.master.service.JavaMailSenderImple">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="medxplus27@gmail.com" />
+        <property name="password" value="medxpassword" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.socketFactory.class">javax.net.SocketFactory</prop>
+                <prop key="mail.smtp.socketFactory.fallback">false</prop>
+            </props>
+        </property>
+    </bean>-->
+    
+     
+		
+    <!-- bean
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">Error</prop>
+            </props>
+        </property>
+    </bean -->
+    
+
+</beans>

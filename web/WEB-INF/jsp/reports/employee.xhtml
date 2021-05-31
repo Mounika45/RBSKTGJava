@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+   
+        <h:form id="jfnskfj">
+            <ace:panel id="sdfs" header="Employee Registration">
+                
+                <h:panelGrid id="employee" columns="1" style="margin-left: 40%" >
+                    <ace:textEntry id="username" label="UserName:" labelPosition="left" value="#{employeeBean.empVo.userName}" immediate="true">
+                        <ace:ajax />
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="firstName" label="FirstName:" labelPosition="left" value="#{employeeBean.empVo.firstName}" immediate="true">
+                        <ace:ajax />
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="lastName" label="LastName:" labelPosition="left" value="#{employeeBean.empVo.lastName}" immediate="true">
+                        <ace:ajax />
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="mobileNo" label="MobileNo:" labelPosition="left" value="#{employeeBean.empVo.mobileNo}" immediate="true">
+                        <ace:ajax />
+                    </ace:textEntry>
+                    
+                    <ace:textEntry id="emailId"  label="Email-Id:" labelPosition="left" value="#{employeeBean.empVo.emailId}" immediate="true">
+                        <ace:ajax />
+                    </ace:textEntry>
+                    
+                    
+                </h:panelGrid>
+                <br/>
+                
+                <ace:pushButton id="save" value="Save" action="#{employeeBean.saveEmployee}" style="margin-left: 50%" immediate="true"/>
+                    
+            </ace:panel>
+        </h:form>
+    
+</ui:composition>

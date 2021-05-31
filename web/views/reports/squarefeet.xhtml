@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:icecore="http://www.icefaces.org/icefaces/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+        <title> Tax Assessment </title>
+        <!-- This line is only for ICE component, remove it if no ice component is used in this page.-->
+        <link rel="stylesheet" type="text/css" href="./xmlhttp/css/rime/rime.css"/>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/WEB-INF/jsp/templates/commonLayout.xhtml"> 
+       
+            <ui:define name="content">               
+                <ui:include src="/WEB-INF/jsp/reports/squarefeet.xhtml"/>
+             </ui:define>
+          
+        </ui:composition>
+    </h:body>
+</ui:composition>
